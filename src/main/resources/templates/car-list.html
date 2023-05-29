@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:replace="fragments/navigation :: navigation"></nav>
+
+<div class="container">
+    <div class="row py-2">
+        <!-- видимость кнопок-->
+        <div class="col-12" sec:authorize="hasRole('ADMIN')">
+            <a class="btn btn-primary" th:href="@{/models/new}">Add Product</a>
+        </div>
+        <div class="col-12 mt-3">
+<!--            <form class="form-inline" th:method="get">-->
+<!--                <div class="form-group mb-2 mr-2">-->
+<!--                    <label for="titleFilter" class="sr-only">Title filter</label>-->
+<!--                    <input type="text" class="form-control" id="titleFilter" th:value="${param.titleFilter}"-->
+<!--                           name="titleFilter" placeholder="Title Filter"/>-->
+<!--                </div>-->
+<!--                <div class="form-group mb-2 mr-2">-->
+<!--                    <label for="minPriceFilter" class="sr-only">Min price filter</label>-->
+<!--                    <input type="number" class="form-control" id="minPriceFilter" th:value="${param.minPriceFilter}"-->
+<!--                           name="minPriceFilter" placeholder="Min Price"/>-->
+<!--                </div>-->
+
+<!--                <div class="form-group mb-2 mr-2">-->
+<!--                    <label for="maxPriceFilter" class="sr-only">Max price filter</label>-->
+<!--                    <input type="number" class="form-control" id="maxPriceFilter" th:value="${param.maxPriceFilter}"-->
+<!--                           name="maxPriceFilter" placeholder="Max Price"/>-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-primary mb-2">Apply</button>-->
+
+<!--            </form>-->
+
+        </div>
+
+        <div class="col-12">
+            <table class="table table-bordered my-2">
+<!--                <thead>-->
+<!--                <tr>-->
+
+<!--                    &lt;!&ndash; сортировка по ID &ndash;&gt;-->
+<!--                    <th scope="col" th:replace="fragments/sort_header :: sort_header ('Id', 'id', )">-->
+<!--                    </th>-->
+
+<!--                    &lt;!&ndash; сортировка по имени &ndash;&gt;-->
+<!--                    <th scope="col" th:replace="fragments/sort_header :: sort_header ('Product name', 'name')">-->
+<!--                    </th>-->
+
+<!--                    &lt;!&ndash; сортировка по цене &ndash;&gt;-->
+<!--                    <th scope="col" th:replace="fragments/sort_header :: sort_header ('Price', 'cost')">-->
+<!--                    </th>-->
+<!--                    <th scope="col">Actions</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+                <tbody>
+                <tr th:if="${models.hasContent()}" th:each="model : ${models}">
+                    <th scope="row" th:text="${model.id}">1</th>
+                    <td th:text="${model.name}">Apple</td>
+                    <td th:text="${model.cost}">10</td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a class="btn btn-success" th:href="@{/models/{id}(id = ${model.id})}"><i
+                                class="fas fa-edit"></i></a>
+                        <form class="d-inline" th:method="delete" th:action="@{/models/{id}(id = ${model.id})}">
+                            <button type="submit" a class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:unless="${models.hasContent()}">
+                    <td colspan="4">The garage is empty</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${models.hasContent()}" class="col-12">
+            <nav aria-label="...">
+                <ul class="pagination">
+
+<!--                    <li th:if="${carList.hasPrevious()}" class="page-item">-->
+<!--                        <a class="page-link"-->
+<!--                           th:replace="fragments/paging :: paging ('Previos', ${products.getNumber()})"></a>-->
+<!--                    </li>-->
+<!--                    <li th:unless="${products.hasPrevious()}" class="page-item disabled">-->
+<!--                        <a class="page-link">Previous</a>-->
+<!--                    </li>-->
+
+<!--                    <li th:each="num : ${#numbers.sequence(1, products.totalPages)}"-->
+<!--                        th:classappend="${num == products.number +1} ? 'active'"-->
+<!--                        class="page-item">-->
+<!--                        <a class="page-link"-->
+<!--                           th:text="${num}"-->
+<!--                           th:replace="fragments/paging :: paging (${num}, ${num})"></a>-->
+<!--                    </li>-->
+
+<!--                    &lt;!&ndash; переход на следующую страницу со всеми параметрами &ndash;&gt;-->
+<!--                    <li th:if="${products.hasNext()}" class="page-item">-->
+<!--                        <a class="page-link"-->
+<!--                           th:replace="fragments/paging :: paging ('Next', ${products.getNumber()+2})"></a>-->
+<!--                    </li>-->
+<!--                    <li th:unless="${products.hasNext()}" class="page-item disabled">-->
+<!--                        <a class="page-link">Next</a>-->
+<!--                    </li>-->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+
+<th:block th:replace="fragments/scripts :: scripts"></th:block>
+</body>
+</html>
