@@ -3,6 +3,7 @@ package com.petrov.shop.utils;
 import com.petrov.shop.dto.CarLabelDto;
 import com.petrov.shop.dto.CarModelDto;
 import com.petrov.shop.dto.RoleDto;
+import com.petrov.shop.dto.RegisterRequestUserDto;
 import com.petrov.shop.dto.UserDto;
 import com.petrov.shop.entity.CarLabel;
 import com.petrov.shop.entity.CarModel;
@@ -37,11 +38,11 @@ public class Converter {
         return carLabel;
     }
 
-    public static CarUser convertCarUser(UserDto userDto) {
+    public static CarUser convertCarUser(UserDto userDto, String password) {
         CarUser carUser = new CarUser();
         carUser.setId(userDto.getId());
         carUser.setLogin(userDto.getLogin());
-        carUser.setPassword(userDto.getPassword());
+        carUser.setPassword(password);
         carUser.setRoles(userDto.getRoles().stream()
                 .map(Converter::convertRole)
                 .collect(Collectors.toSet()));

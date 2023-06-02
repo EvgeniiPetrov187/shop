@@ -23,7 +23,7 @@ public class CarUser {
     @Column(name = "login")
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 2000)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

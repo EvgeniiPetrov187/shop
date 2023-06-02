@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface UserDao extends JpaRepository<CarUser, Long> {
 
-    Optional<CarUser> findByLogin(@Param("login") String login);
+    Optional<CarUser> findByLogin(String login);
 }

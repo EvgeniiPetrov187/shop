@@ -1,5 +1,6 @@
 package com.petrov.shop.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserDto {
@@ -8,11 +9,7 @@ public class UserDto {
 
     private String login;
 
-    private String password;
-
-    private String passwordRpt;
-
-    private Set<RoleDto> roles;
+    private Set<RoleDto> roles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -30,27 +27,11 @@ public class UserDto {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Set<RoleDto> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<RoleDto> roles) {
         this.roles = roles;
-    }
-
-    public String getPasswordRpt() {
-        return passwordRpt;
-    }
-
-    public void setPasswordRpt(String passwordRpt) {
-        this.passwordRpt = passwordRpt;
     }
 }

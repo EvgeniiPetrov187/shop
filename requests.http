@@ -1,0 +1,25 @@
+###
+GET http://localhost:8081/login
+
+###
+GET http://localhost:8081/shop/models/all
+
+###
+POST http://localhost:8081/shop/register
+Content-Type: application/json
+
+{
+  "login": "miopold",
+  "password": "terry",
+  "passwordRpt": "terry"
+
+}
+###
+POST http://localhost:8081/shop/login
+Content-Type: application/json
+
+{
+"login": "miopold",
+"password": "terry"
+
+}
