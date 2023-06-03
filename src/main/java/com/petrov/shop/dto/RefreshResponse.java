@@ -1,10 +1,10 @@
 package com.petrov.shop.dto;
 
-public class LoginResponseUserDto {
+public class RefreshResponse {
 
     private String token;
 
-    public LoginResponseUserDto(String token) {
+    public RefreshResponse(String token) {
         this.token = token;
     }
 

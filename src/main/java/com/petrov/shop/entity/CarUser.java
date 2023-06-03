@@ -1,5 +1,6 @@
 package com.petrov.shop.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
@@ -31,6 +33,9 @@ public class CarUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "carUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Token> tokens;
 
     public Long getId() {
         return id;
@@ -62,5 +67,13 @@ public class CarUser {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(Set<Token> tokens) {
+        this.tokens = tokens;
     }
 }
