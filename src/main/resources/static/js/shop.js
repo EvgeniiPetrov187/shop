@@ -1,3 +1,5 @@
+var carModelApi = Vue.resource('/shop/models{/id}');
+
 function getIndex(list, id) {
     for (var i = 0; i < list.length; i++) {
         if (list[i].id === id) {
@@ -6,8 +8,6 @@ function getIndex(list, id) {
     }
     return -1;
 }
-
-var carModelApi = Vue.resource('/shop/models{/id}');
 
 Vue.component('car-form', {
         props: ['cars', 'carAttr'],
@@ -103,6 +103,7 @@ Vue.component('car-row', {
 })
 
 Vue.component('car-list', {
+    path: '/shop/models',
     props: ['cars'],
     data: function () {
         return {

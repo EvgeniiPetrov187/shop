@@ -35,12 +35,6 @@ public class Mapper {
         return new CarLabelDto(carLabel.getId(), carLabel.getLabelName());
     }
 
-//    public static User mapUserAuth(CarUser carUser) {
-//        return new User(carUser.getLogin(), carUser.getPassword(), carUser.getRoles().stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getTitle()))
-//                .collect(Collectors.toList()));
-//    }
-
     public static RegisterRequestUserDto mapUser(CarUser carUser) {
         return new RegisterRequestUserDto();
     }

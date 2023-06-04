@@ -4,7 +4,6 @@
     <meta charset="=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CarShop "Grandeur"</title>
-    <link href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -25,8 +24,8 @@
             </ul>
 
             <div class="text-end">
-                <a type="button" href="login.html" class="btn btn-outline-light me-2">Sign in</a>
-                <a type="button" href="registration.html" class="btn btn-warning">Register</a>
+                <button type="button" class="btn btn-outline-light me-2">Sign in</button>
+                <button type="button" class="btn btn-warning">Register</button>
             </div>
         </div>
     </div>
@@ -35,13 +34,13 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <h1>Home</h1>
+            <div id="app">{{ cars }}</div>
         </div>
     </div>
 </div>
 
 </body>
-<script src="js/login.js"></script>
+<script src="js/shop.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

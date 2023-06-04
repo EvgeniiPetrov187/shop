@@ -29,6 +29,16 @@ public class Token {
     @JoinColumn(name = "car_user_id")
     private CarUser carUser;
 
+    public Token() {
+    }
+
+    public Token(String token, Date expiredAt, Date issuedAt, CarUser carUser) {
+        this.refreshToken = token;
+        this.expiredAt = expiredAt;
+        this.issuedAt = issuedAt;
+        this.carUser = carUser;
+    }
+
     public Long getId() {
         return id;
     }
