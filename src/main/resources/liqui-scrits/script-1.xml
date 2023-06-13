@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-seq" author="epetrov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists schemaName="RGK_Z" sequenceName="SEQ_LABEL"/>
+                <sequenceExists schemaName="RGK_Z" sequenceName="SEQ_MODEL"/>
+                <sequenceExists schemaName="RGK_Z" sequenceName="SEQ_USER"/>
+                <sequenceExists schemaName="RGK_Z" sequenceName="SEQ_TOKEN"/>
+                <sequenceExists schemaName="RGK_Z" sequenceName="SEQ_ROLE"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE EPETROV.SEQ_LABEL START WITH 90
+            INCREMENT BY 1
+            MINVALUE 1
+            MAXVALUE 9999999999999999999999999999
+            CYCLE;
+        </sql>
+        <sql>
+            CREATE SEQUENCE EPETROV.SEQ_MODEL START WITH 91
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9999999999999999999999999999
+                CYCLE;
+        </sql>
+        <sql>
+            CREATE SEQUENCE EPETROV.SEQ_USER START WITH 155
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9999999999999999999999999999
+                CYCLE;
+        </sql>
+        <sql>
+            CREATE SEQUENCE EPETROV.SEQ_TOKEN START WITH 175
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9999999999999999999999999999
+                CYCLE;
+        </sql>
+        <sql>
+            CREATE SEQUENCE EPETROV.SEQ_ROLE START WITH 2
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9999999999999999999999999999
+                CYCLE;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="insert-volvo" author="epetrov">
+        <preConditions onFail="WARN">
+            <sqlCheck expectedResult="0">select count(*)
+                                         from epetrov.car_model
+                                         where model_name = 'S40'</sqlCheck>
+        </preConditions>
+        <sql>
+            Insert into EPETROV.CAR_LABEL (ID, LABEL_NAME)
+            values (EPETROV.SEQ_LABEL.NEXTVAL,'Volvo');
+        </sql>
+
+        <sql>
+            Insert into EPETROV.CAR_MODEL (ID, MODEL_NAME, PRICE)
+            values (EPETROV.SEQ_MODEL.NEXTVAL,'S40', '8500000');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

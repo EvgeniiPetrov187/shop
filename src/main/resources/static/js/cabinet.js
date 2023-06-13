@@ -24,7 +24,9 @@ Vue.component('user', {
             '</main>',
         created: function () {
             userApi.get().then(result =>
-                result.json()
+                result.json().then(function () {
+                    window.location.href = ''
+                })
             )
         },
     }

@@ -28,7 +28,9 @@ Vue.component('login', {
             signin: function () {
                 var user = {login: this.login.trim(), password: this.password.trim()};
                 loginApi.save({}, user).then(result =>
-                    result.json().then(data => {
+                    result.json().then(function () {
+                        window.location.href = '/shop/user'
+                    }).then(data => {
                         this.login = '';
                         this.password = '';
                     })

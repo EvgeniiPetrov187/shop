@@ -81,7 +81,7 @@ public class UserAuthService {
     }
 
     public boolean logout(String refreshToken) {
-        Long id = Jwt.userIdFrom(refreshToken, accessTokenSecret);
+        Long id = Jwt.userIdFrom(refreshToken, refreshTokenSecret);
 
         CarUser carUser = userDao.getById(id);
         Token token = carUser.getTokens().stream()

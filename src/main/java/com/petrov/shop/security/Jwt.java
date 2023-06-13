@@ -45,12 +45,12 @@ public class Jwt {
         return new Jwt(Jwts.builder()
                 .claim("id", id)
                 .setIssuedAt(issuedAt)
-                .setExpiration(Date.from(date.plus(validationTime, ChronoUnit.MINUTES)))
+                .setExpiration(expiredAt)
                 .signWith(SignatureAlgorithm.HS256,
                         Base64.getEncoder()
                                 .encodeToString(secretKey
                                         .getBytes(StandardCharsets.UTF_8)))
-                .compact(), issuedAt, expiredAt) ;
+                .compact(), issuedAt, expiredAt);
     }
 
     public static Long userIdFrom(String token, String tokenSecret) {
@@ -63,16 +63,11 @@ public class Jwt {
     }
 
     public static Jwt from(String token, String tokenSecret) {
-        Date expiredAt = ((Claims) Jwts.parserBuilder()
+        Claims claims = (Claims) Jwts.parserBuilder()
                 .setSigningKey(Base64.getEncoder().encodeToString(tokenSecret.getBytes(StandardCharsets.UTF_8)))
                 .build()
                 .parse(token)
-                .getBody()).getExpiration();
-        Date issuedAt = ((Claims) Jwts.parserBuilder()
-                .setSigningKey(Base64.getEncoder().encodeToString(tokenSecret.getBytes(StandardCharsets.UTF_8)))
-                .build()
-                .parse(token)
-                .getBody()).getIssuedAt();
-        return new Jwt(token, issuedAt, expiredAt);
+                .getBody();
+        return new Jwt(token, claims.getIssuedAt(), claims.getExpiration());
     }
 }
