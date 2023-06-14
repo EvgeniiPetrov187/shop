@@ -31,15 +31,15 @@ public class CarModelService implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public void saveOrUpdate(CarModelDto carModelDto) {
+    public CarModel saveOrUpdate(CarModelDto carModelDto) {
         CarLabel carLabel = carLabelDao.getCarLabelByLabelName(carModelDto.getLabelName());
         if (carLabel == null) {
             carLabel = carLabelDao.save(new CarLabel(carModelDto.getLabelName()));
         }
-        carModelDao.save(convertModel(carModelDto, carLabel));
+        return carModelDao.save(convertModel(carModelDto, carLabel));
     }
 
-    public void saveOrUpdate(CarModel carModel, CarModelDto carModelDto) {
+    public CarModel saveOrUpdate(CarModel carModel, CarModelDto carModelDto) {
         CarLabel carLabel = carLabelDao.getCarLabelByLabelName(carModelDto.getLabelName());
         if (carLabel == null) {
             carLabel = carLabelDao.save(new CarLabel(carModelDto.getLabelName()));
@@ -47,7 +47,7 @@ public class CarModelService implements Serializable {
         carModel.setModelName(carModelDto.getModelName());
         carModel.setPrice(carModelDto.getPrice());
         carModel.setCarLabel(carLabel);
-        carModelDao.save(carModel);
+        return carModelDao.save(carModel);
     }
 
     public void deleteModel(CarModel carModelDto) {

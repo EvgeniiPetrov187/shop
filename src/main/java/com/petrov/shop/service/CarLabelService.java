@@ -28,7 +28,7 @@ public class CarLabelService implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public void saveOrUpdate (CarLabelDto carLabelDto) {
-        carLabelDao.save(convertLabel(carLabelDto));
+    public CarLabel saveOrUpdate (CarLabelDto carLabelDto) {
+        return carLabelDao.save(convertLabel(carLabelDto));
     }
 }

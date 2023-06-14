@@ -32,15 +32,18 @@ Vue.component('register', {
         methods: {
             register: function () {
                 var user = {login: this.login.trim(), password: this.password.trim(), passwordRpt: this.passwordRpt.trim()};
+                var success;
                 registerApi.save({}, user).then(result =>
                     result.json().then(data => {
+                        debugger
+                        success = data.login
                         this.login = '';
                         this.password = '';
                         this.passwordRpt = '';
-                    }).then(result => {
+                    }).then(() => {
                         debugger
-                        if (result.ok) {
-                           window.location.href='/shop/login';
+                        if (success) {
+                           window.location.href='/shop/login.html';
                         }
                     })
                 )

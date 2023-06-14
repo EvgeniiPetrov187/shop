@@ -1,7 +1,7 @@
 var userApi = Vue.resource('/shop/user');
 
 Vue.component('user', {
-        path: '/shop/user',
+        path: '/user',
         props: ['user'],
         data: function () {
             return {
@@ -35,7 +35,7 @@ Vue.component('user', {
 var app = new Vue({
     el: '#user',
     template:
-        '<login :user="user"/>',
+        '<user :user="user"/>',
     data: {
         user: null
     }

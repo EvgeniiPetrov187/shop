@@ -22,7 +22,7 @@ public class CarModel {
     @Column(name = "model_name", length = 200)
     private String modelName;
 
-    @Column(name = "price", length = 20, precision = 2)
+    @Column(name = "price", precision = 19, scale = 2)
     private BigDecimal price;
 
     @ManyToOne

@@ -21,9 +21,6 @@ import java.util.List;
 public class CarModelController {
 
     @Autowired
-    private CarLabelService carLabelService;
-
-    @Autowired
     private CarModelService carModelService;
 
     @GetMapping()

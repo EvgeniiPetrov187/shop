@@ -1,4 +1,5 @@
 var loginApi = Vue.resource('/shop/login');
+var login;
 
 Vue.component('login', {
         path: '/login',
@@ -29,9 +30,8 @@ Vue.component('login', {
                 var user = {login: this.login.trim(), password: this.password.trim()};
                 loginApi.save({}, user).then(result =>
                     result.json().then(function () {
-                        window.location.href = '/shop/user'
+                        window.location.href = '/shop/cabinet.html'
                     }).then(data => {
-                        this.login = '';
                         this.password = '';
                     })
                 )
