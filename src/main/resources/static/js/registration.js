@@ -35,7 +35,6 @@ Vue.component('register', {
                 var success;
                 registerApi.save({}, user).then(result =>
                     result.json().then(data => {
-                        debugger
                         success = data.login
                         this.login = '';
                         this.password = '';

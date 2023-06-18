@@ -1,7 +1,7 @@
 var userApi = Vue.resource('/shop/user');
 
 Vue.component('user', {
-        path: '/user',
+        path: '/shop/user',
         props: ['user'],
         data: function () {
             return {
@@ -23,6 +23,8 @@ Vue.component('user', {
             '</div>' +
             '</main>',
         created: function () {
+            console.log('ggggg')
+            debugger
             userApi.get().then(result =>
                 result.json().then(function () {
                     window.location.href = ''

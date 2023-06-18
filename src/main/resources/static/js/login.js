@@ -28,13 +28,21 @@ Vue.component('login', {
         methods: {
             signin: function () {
                 var user = {login: this.login.trim(), password: this.password.trim()};
-                loginApi.save({}, user).then(result =>
-                    result.json().then(function () {
-                        window.location.href = '/shop/cabinet.html'
-                    }).then(data => {
-                        this.password = '';
-                    })
-                )
+                debugger
+                loginApi.save({}, user)
+                    .then(result =>
+                        fetch('/shop/user', {
+                            method: 'GET',
+                            headers: {
+                                Authorization: 'Bearer ' + result.data.token
+                            }
+                        })
+                            .then(data => {
+                                console.log(data)
+                                window.location.href = '/shop/cabinet.html'
+                                }
+                            )
+                    )
             }
         }
     }
