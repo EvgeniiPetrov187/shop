@@ -21,6 +21,7 @@ Vue.component('car-form', {
         },
         watch: {
             carAttr: function (newVal, oldVal) {
+                debugger
                 this.id = newVal.id;
                 this.labelName = newVal.labelName;
                 this.modelName = newVal.modelName;
@@ -90,6 +91,7 @@ Vue.component('car-row', {
         '</tr>',
     methods: {
         edit: function () {
+            debugger
             this.editCar(this.car);
         },
         del: function () {
@@ -129,6 +131,7 @@ Vue.component('car-list', {
     },
     methods: {
         editCar: function (car) {
+            debugger
             this.car = car;
         }
     }

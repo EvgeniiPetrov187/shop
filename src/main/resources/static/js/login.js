@@ -1,8 +1,8 @@
 var loginApi = Vue.resource('/shop/login');
-var login;
 
 Vue.component('login', {
         path: '/login',
+        props: ['user', 'setUser'],
         data: function () {
             return {
                 id: '',
@@ -11,7 +11,7 @@ Vue.component('login', {
             }
         },
         template:
-            '<main class="form-signin w-100 m-auto">' +
+            '<main class="form-signin w-100 m-auto login-form">' +
             '<form>' +
             '<h1 class="h3 mb-3 fw-normal">Please, enter</h1>' +
             '<div class="form-floating">' +
@@ -27,9 +27,9 @@ Vue.component('login', {
             '</main>',
         methods: {
             signin: function () {
-                var user = {login: this.login.trim(), password: this.password.trim()};
+                var userForSave = {login: this.login.trim(), password: this.password.trim()};
                 debugger
-                loginApi.save({}, user)
+                loginApi.save({}, userForSave)
                     .then(result =>
                         fetch('/shop/user', {
                             method: 'GET',
@@ -37,20 +37,65 @@ Vue.component('login', {
                                 Authorization: 'Bearer ' + result.data.token
                             }
                         })
-                            .then(data => {
-                                console.log(data)
-                                window.location.href = '/shop/cabinet.html'
-                                }
-                            )
+                    )
+                    .then(data => data.json())
+                    .then(data => {
+                            debugger
+                            this.setUser(data)
+                            this.id = ''
+                            this.login = ''
+                            this.password = ''
+                            $('.login-form').css('display', 'none')
+                            $('.shop-link').css('display', 'block')
+                            $('.user-form').css('display', 'block')
+                        }
                     )
             }
         }
     }
 )
 
+Vue.component('show-user', {
+        props: ['id', 'login'],
+        template:
+            '<main class="form-signin w-100 m-auto user-form" style="display: none">' +
+            '<h1 class="h3 mb-3 fw-normal">You are</h1>' +
+            '<div class="form-floating">' +
+            '<h3 type="text" class="form-control" id="floatingPassword">{{ id }}</h3>' +
+            '<label htmlFor="floatingInput">Your ID is</label>' +
+            '</div>' +
+            '<div class="form-floating">' +
+            '<h3 type="text" class="form-control" id="floatingPassword">{{ login }}</h3>' +
+            '<label htmlFor="floatingPassword">Your login is</label>' +
+            '</div>' +
+            '<a href="shop.html" class="shop-link" style="display: none">Go to shop</a>' +
+            '</main>'
+    }
+)
+
+Vue.component('main-info', {
+        props: ['user', 'id', 'login'],
+        template:
+            '<div>' +
+            '<login :user="user" :setUser="setUser"/>' +
+            '<show-user :id="id" :login="login"/>' +
+            '</div>',
+        methods: {
+            setUser: function (user) {
+                debugger
+                this.id = user.id
+                this.login = user.login
+            }
+        }
+    }
+)
+
 var app = new Vue({
-    el: '#login',
+    el: '#app',
     template:
-        '<login/>'
+        '<main-info/>',
+    data: {
+        user: []
+    }
 });
 
