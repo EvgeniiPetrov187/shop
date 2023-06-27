@@ -28,7 +28,6 @@ Vue.component('login', {
         methods: {
             signin: function () {
                 var userForSave = {login: this.login.trim(), password: this.password.trim()};
-                debugger
                 loginApi.save({}, userForSave)
                     .then(result =>
                         fetch('/shop/user', {
@@ -40,13 +39,11 @@ Vue.component('login', {
                     )
                     .then(data => data.json())
                     .then(data => {
-                            debugger
                             this.setUser(data)
                             this.id = ''
                             this.login = ''
                             this.password = ''
                             $('.login-form').css('display', 'none')
-                            $('.shop-link').css('display', 'block')
                             $('.user-form').css('display', 'block')
                         }
                     )
@@ -68,8 +65,22 @@ Vue.component('show-user', {
             '<h3 type="text" class="form-control" id="floatingPassword">{{ login }}</h3>' +
             '<label htmlFor="floatingPassword">Your login is</label>' +
             '</div>' +
-            '<a href="shop.html" class="shop-link" style="display: none">Go to shop</a>' +
-            '</main>'
+            '<a href="shop.html" class="shop-link">Go to shop</a>' +
+            '<input type="button" class="btn btn-primary w-100 py-2" value="Log out" @click="logout">' +
+            '</main>',
+        methods: {
+            logout: function () {
+                fetch('/shop/exit', {
+                    method: 'POST',
+                }).then(() => {
+                        this.id = ''
+                        this.login = ''
+                        $('.login-form').css('display', 'block')
+                        $('.user-form').css('display', 'none')
+                    }
+                )
+            }
+        }
     }
 )
 
@@ -82,7 +93,6 @@ Vue.component('main-info', {
             '</div>',
         methods: {
             setUser: function (user) {
-                debugger
                 this.id = user.id
                 this.login = user.login
             }
